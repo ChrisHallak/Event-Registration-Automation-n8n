@@ -1,0 +1,531 @@
+{
+  "name": "Reference | Email Receiver V1",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "# Version 1",
+        "height": 80,
+        "width": 150,
+        "color": "#606060"
+      },
+      "id": "78927022-42fe-43e8-a176-9574bc8ae4b4",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        176
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Send Verification To Member Sended Data",
+        "width": 224,
+        "color": 6
+      },
+      "id": "c643940f-2083-47a3-a331-ddaf6886ecd1",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1136,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Make Data Easy To See",
+        "width": 176,
+        "color": 5
+      },
+      "id": "170444a2-dcfd-46f2-afa0-ccb30647dd71",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        656,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Save This Data To Ability To Back To It",
+        "width": 176,
+        "color": 2
+      },
+      "id": "dcae37c8-6a58-420f-aa56-33b3d1eddef9",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        368,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Create Form To Receive Name ,Mail and Date Of Event Attendance\n",
+        "color": 5
+      },
+      "id": "b93b4a0e-9db4-4cc6-8ab6-8497cdb374eb",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "Arab Automators Event",
+        "emailType": "text",
+        "message": "=تم تأكيد حجزك بنجاح أ {{ $json.name }} منتظرين حضرتك إن شاء الله يوم  {{ $json.date }} في Arab Automators Event",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "1a8ff245-8661-418e-896d-ae0bea76d915",
+      "name": "Send Confirmation Mail",
+      "webhookId": "fab0279e-cc59-4003-9076-db8c30ffe8f9",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1296,
+        96
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Df0TP5IvZhtb4Kvb",
+          "name": "AAC Credentials"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "BWIyC9QIl6iD1vuz",
+          "mode": "list",
+          "cachedResultName": "Arab Automators First Data Table",
+          "cachedResultUrl": "/projects/5kxsqDnsgkGX3nTX/datatables/BWIyC9QIl6iD1vuz"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json.Name }}",
+            "email": "={{ $json.Email }}",
+            "date": "={{ $json.Date }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "43b443dc-802f-489c-b2be-894774e1054d",
+      "name": "Insert Data",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        480,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e141d792-aab7-4bdf-9d93-cf831867caa0",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "52fd2e74-4c20-4fa3-8c2d-327124dc76fe",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "f0905fbe-ffaf-40e4-83ac-6bd6c9be426e",
+              "name": "date",
+              "value": "={{ $('Get Data').item.json.Date }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "aca876e6-f6c2-46b1-94e8-bf91a010f13d",
+      "name": "Clarify Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        768,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "formTitle": "Arab Automators",
+        "formDescription": "Form To Learning First Workflow",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "placeholder": "enter your name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "placeholder": "pixtaha@outlook.com",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Date",
+              "fieldType": "date",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e47beeeb-ddeb-4862-9a42-6f5c1724b44d",
+      "name": "Get Data",
+      "webhookId": "cb7fcb89-655c-4c03-ab66-d2b238cb4855",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        176,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Version 2\n",
+        "height": 80,
+        "width": 150,
+        "color": "#606060"
+      },
+      "id": "e1b5c893-e7da-434c-8a50-6c903e0b6fd2",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "formId": "5BJKoo"
+      },
+      "type": "n8n-nodes-tallyforms.tallyTrigger",
+      "typeVersion": 2,
+      "position": [
+        272,
+        496
+      ],
+      "id": "bc40eb9d-06f9-42b0-9fbd-0d49fb2a0b49",
+      "name": "Tally Trigger",
+      "webhookId": "97359dbf-b34a-47ba-8fe5-14fb4f62b4c8",
+      "credentials": {
+        "tallyApi": {
+          "id": "I5OCfTL3lGEQLa9z",
+          "name": "Tally account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "duP6ZGk9ASAYNdh2",
+          "mode": "list",
+          "cachedResultName": "automators",
+          "cachedResultUrl": "/projects/77UJPiCkLRmB77wJ/datatables/duP6ZGk9ASAYNdh2"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.question_k7olDr.value }}",
+            "Email": "={{ $json.question_vOZM7g.value }}",
+            "Date": "={{ $json.question_KJEz7g.value }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        496,
+        496
+      ],
+      "id": "e6a03bea-d0d7-4081-96b2-2142c43b6c15",
+      "name": "Insert row"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "23e838ba-69f8-4061-a9b6-322d22363bec",
+              "name": "name",
+              "value": "={{ $json.Name }}",
+              "type": "string"
+            },
+            {
+              "id": "0e970568-af16-4b60-9528-ee5a737f5aa0",
+              "name": "email",
+              "value": "={{ $json.Email }}",
+              "type": "string"
+            },
+            {
+              "id": "6eb779d9-f9b6-43f3-aa45-882221ecb962",
+              "name": "date",
+              "value": "={{ $('Tally Trigger').item.json.question_KJEz7g.value }}",
+              "type": "string"
+            },
+            {
+              "id": "8fe037d6-ff43-4348-bc47-9010411d4060",
+              "name": "recieve email",
+              "value": "={{ $('Tally Trigger').item.json['question_LJr9Ay_9a005bcd-d766-415d-803a-8be45bbc6838'].value }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        720,
+        496
+      ],
+      "id": "92f20cfa-fd25-410b-a077-1c3199b61532",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "7a65d4eb-1c8d-43bd-967a-a9ba65510ca1",
+              "leftValue": "={{ $json['recieve email'] }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        944,
+        496
+      ],
+      "id": "aab1c327-7f66-4c06-94ef-6944bb3da48b",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "christeenhallak33@gmail.com",
+        "subject": "Arab Automators Event",
+        "message": "=<p>Hi <strong>{{ $json.name }}</strong>,</p> <p>you are invited to attend Arab Automators Event <strong>in {{ $('Tally Trigger').item.json.question_KJEz7g.value  }}.",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1184,
+        480
+      ],
+      "id": "7901dc72-98d6-44e0-aa89-c679f58869dc",
+      "name": "Send a message",
+      "webhookId": "8299fdcb-c6a2-4bce-9ad0-f9b73c8c10c0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ajl2AaUruQnUbPvz",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Insert Data": {
+      "main": [
+        [
+          {
+            "node": "Clarify Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clarify Data": {
+      "main": [
+        [
+          {
+            "node": "Send Confirmation Mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Data": {
+      "main": [
+        [
+          {
+            "node": "Insert Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tally Trigger": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert row": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "f34cb63c-2711-4a96-8901-b91da9c74327",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ffb3a7681a2409e5603e233585f9ef8b069c3606e6dd4c3fb2765ef81992feb4"
+  },
+  "nodeGroups": [],
+  "id": "uAFS1GIQUaYxXxNB",
+  "tags": []
+}
