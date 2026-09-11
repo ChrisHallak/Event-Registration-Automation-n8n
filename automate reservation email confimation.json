@@ -1,0 +1,545 @@
+{
+  "name": "Reference | Email Receiver V1",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "# Version 1",
+        "height": 80,
+        "width": 150,
+        "color": "#606060"
+      },
+      "id": "78927022-42fe-43e8-a176-9574bc8ae4b4",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        176
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Send Verification To Member Sended Data",
+        "width": 224,
+        "color": 6
+      },
+      "id": "c643940f-2083-47a3-a331-ddaf6886ecd1",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1136,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Make Data Easy To See",
+        "width": 176,
+        "color": 5
+      },
+      "id": "170444a2-dcfd-46f2-afa0-ccb30647dd71",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        656,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Save This Data To Ability To Back To It",
+        "width": 176,
+        "color": 2
+      },
+      "id": "dcae37c8-6a58-420f-aa56-33b3d1eddef9",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        368,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Create Form To Receive Name ,Mail and Date Of Event Attendance\n",
+        "color": 5
+      },
+      "id": "b93b4a0e-9db4-4cc6-8ab6-8497cdb374eb",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "Arab Automators Event",
+        "emailType": "text",
+        "message": "=تم تأكيد حجزك بنجاح أ {{ $json.name }} منتظرين حضرتك إن شاء الله يوم  {{ $json.date }} في Arab Automators Event",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "1a8ff245-8661-418e-896d-ae0bea76d915",
+      "name": "Send Confirmation Mail",
+      "webhookId": "fab0279e-cc59-4003-9076-db8c30ffe8f9",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1296,
+        96
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Df0TP5IvZhtb4Kvb",
+          "name": "AAC Credentials"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "BWIyC9QIl6iD1vuz",
+          "mode": "list",
+          "cachedResultName": "Arab Automators First Data Table",
+          "cachedResultUrl": "/projects/5kxsqDnsgkGX3nTX/datatables/BWIyC9QIl6iD1vuz"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json.Name }}",
+            "email": "={{ $json.Email }}",
+            "date": "={{ $json.Date }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "43b443dc-802f-489c-b2be-894774e1054d",
+      "name": "Insert Data",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        480,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e141d792-aab7-4bdf-9d93-cf831867caa0",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "52fd2e74-4c20-4fa3-8c2d-327124dc76fe",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "f0905fbe-ffaf-40e4-83ac-6bd6c9be426e",
+              "name": "date",
+              "value": "={{ $('Get Data').item.json.Date }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "aca876e6-f6c2-46b1-94e8-bf91a010f13d",
+      "name": "Clarify Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        768,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "formTitle": "Arab Automators",
+        "formDescription": "Form To Learning First Workflow",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "placeholder": "enter your name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "placeholder": "pixtaha@outlook.com",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Date",
+              "fieldType": "date",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e47beeeb-ddeb-4862-9a42-6f5c1724b44d",
+      "name": "Get Data",
+      "webhookId": "cb7fcb89-655c-4c03-ab66-d2b238cb4855",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        176,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Version 2\n",
+        "height": 80,
+        "width": 150,
+        "color": "#606060"
+      },
+      "id": "e1b5c893-e7da-434c-8a50-6c903e0b6fd2",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "formId": "5BJKoo"
+      },
+      "type": "n8n-nodes-tallyforms.tallyTrigger",
+      "typeVersion": 2,
+      "position": [
+        272,
+        496
+      ],
+      "id": "bc40eb9d-06f9-42b0-9fbd-0d49fb2a0b49",
+      "name": "Tally Trigger",
+      "webhookId": "97359dbf-b34a-47ba-8fe5-14fb4f62b4c8",
+      "credentials": {
+        "tallyApi": {
+          "id": "I5OCfTL3lGEQLa9z",
+          "name": "Tally account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "duP6ZGk9ASAYNdh2",
+          "mode": "list",
+          "cachedResultName": "automators",
+          "cachedResultUrl": "/projects/77UJPiCkLRmB77wJ/datatables/duP6ZGk9ASAYNdh2"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.question_k7olDr.value }}",
+            "Email": "={{ $json.question_vOZM7g.value }}",
+            "Date": "={{ $json.question_KJEz7g.value }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        496,
+        496
+      ],
+      "id": "e6a03bea-d0d7-4081-96b2-2142c43b6c15",
+      "name": "Insert row"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "23e838ba-69f8-4061-a9b6-322d22363bec",
+              "name": "name",
+              "value": "={{ $json.Name }}",
+              "type": "string"
+            },
+            {
+              "id": "0e970568-af16-4b60-9528-ee5a737f5aa0",
+              "name": "email",
+              "value": "={{ $json.Email }}",
+              "type": "string"
+            },
+            {
+              "id": "6eb779d9-f9b6-43f3-aa45-882221ecb962",
+              "name": "date",
+              "value": "={{ $('Tally Trigger').item.json.question_KJEz7g.value }}",
+              "type": "string"
+            },
+            {
+              "id": "8fe037d6-ff43-4348-bc47-9010411d4060",
+              "name": "recieve email",
+              "value": "={{ $('Tally Trigger').item.json['question_LJr9Ay_9a005bcd-d766-415d-803a-8be45bbc6838'].value }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        720,
+        496
+      ],
+      "id": "92f20cfa-fd25-410b-a077-1c3199b61532",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "7a65d4eb-1c8d-43bd-967a-a9ba65510ca1",
+              "leftValue": "={{ $json['recieve email'] }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        944,
+        496
+      ],
+      "id": "aab1c327-7f66-4c06-94ef-6944bb3da48b",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "Arab Automators Event",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Booking Confirmation</title>\n</head>\n\n<body style=\"\n  margin:0;\n  padding:0;\n  background:#f5f5f5;\n  font-family:Arial, Helvetica, sans-serif;\n  color:#222222;\n\">\n\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"\n         style=\"background:#f5f5f5; padding:30px 15px;\">\n\n    <tr>\n      <td align=\"center\">\n\n        <!-- Main Container -->\n        <table width=\"550\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"\n               style=\"\n                 max-width:550px;\n                 width:100%;\n                 background:#ffffff;\n                 border-radius:12px;\n                 overflow:hidden;\n               \">\n\n          <!-- HEADER -->\n          <tr>\n            <td style=\"\n              background:#111111;\n              padding:32px 28px;\n              color:#ffffff;\n            \">\n\n              <div style=\"\n                display:inline-block;\n                border:1px solid #555555;\n                border-radius:20px;\n                padding:7px 13px;\n                font-size:11px;\n                font-weight:bold;\n                letter-spacing:.5px;\n                color:#dddddd;\n              \">\n                BOOKING CONFIRMED\n              </div>\n\n              <h1 style=\"\n                margin:20px 0 10px 0;\n                font-size:28px;\n                line-height:1.15;\n                color:#ffffff;\n              \">\n                You're officially<br>\n                on the guest list.\n              </h1>\n\n              <p style=\"\n                margin:0;\n                color:#aaaaaa;\n                font-size:14px;\n                line-height:1.5;\n              \">\n                Your reservation for\n                <strong style=\"color:#ffffff;\">\n                  {{$json.eventName}}\n                </strong>\n                has been successfully confirmed.\n              </p>\n\n            </td>\n          </tr>\n\n\n          <!-- CONTENT -->\n          <tr>\n            <td style=\"padding:35px 28px 25px 28px;\">\n\n              <p style=\"\n                margin:0 0 12px 0;\n                color:#777777;\n                font-size:14px;\n              \">\n                Hello,\n              </p>\n\n              <h2 style=\"\n                margin:0 0 22px 0;\n                font-size:24px;\n                color:#222222;\n              \">\n                {{$json.name}}\n              </h2>\n\n              <p style=\"\n                margin:0 0 25px 0;\n                color:#555555;\n                font-size:14px;\n                line-height:1.6;\n              \">\n                We're excited to confirm your place at\n                <strong>{{$json.eventName}}</strong>.\n                Keep this email as your booking confirmation.\n              </p>\n\n\n              <!-- DETAILS TABLE -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"\n                     style=\"\n                       border:1px solid #e5e5e5;\n                       border-radius:10px;\n                       overflow:hidden;\n                     \">\n\n                <!-- EVENT -->\n                <tr>\n                  <td style=\"\n                    padding:16px;\n                    background:#fafafa;\n                    border-bottom:1px solid #e5e5e5;\n                    color:#888888;\n                    font-size:12px;\n                    font-weight:bold;\n                  \">\n                    EVENT\n                  </td>\n\n                  <td align=\"right\" style=\"\n                    padding:16px;\n                    background:#fafafa;\n                    border-bottom:1px solid #e5e5e5;\n                    color:#111111;\n                    font-size:13px;\n                    font-weight:bold;\n                  \">\n                    Arab Automators Event\n                  </td>\n                </tr>\n\n\n                <!-- ATTENDEE -->\n                <tr>\n                  <td style=\"\n                    padding:16px;\n                    border-bottom:1px solid #e5e5e5;\n                    color:#888888;\n                    font-size:12px;\n                    font-weight:bold;\n                  \">\n                    ATTENDEE\n                  </td>\n\n                  <td align=\"right\" style=\"\n                    padding:16px;\n                    border-bottom:1px solid #e5e5e5;\n                    color:#111111;\n                    font-size:13px;\n                    font-weight:bold;\n                  \">\n                    {{$json.name}}\n                  </td>\n                </tr>\n\n\n                <!-- EMAIL -->\n                <tr>\n                  <td style=\"\n                    padding:16px;\n                    background:#fafafa;\n                    border-bottom:1px solid #e5e5e5;\n                    color:#888888;\n                    font-size:12px;\n                    font-weight:bold;\n                  \">\n                    EMAIL\n                  </td>\n\n                  <td align=\"right\" style=\"\n                    padding:16px;\n                    background:#fafafa;\n                    border-bottom:1px solid #e5e5e5;\n                    font-size:13px;\n                  \">\n                    <a href=\"mailto:{{$json.email}}\"\n                       style=\"\n                         color:#2864c7;\n                         font-weight:bold;\n                         text-decoration:underline;\n                       \">\n                      {{$json.email}}\n                    </a>\n                  </td>\n                </tr>\n\n\n                <!-- DATE -->\n                <tr>\n                  <td style=\"\n                    padding:16px;\n                    color:#888888;\n                    font-size:12px;\n                    font-weight:bold;\n                  \">\n                    DATE\n                  </td>\n\n                  <td align=\"right\" style=\"\n                    padding:16px;\n                    color:#111111;\n                    font-size:13px;\n                    font-weight:bold;\n                  \">\n                    {{$json.date}}\n                  </td>\n                </tr>\n\n              </table>\n\n\n              <!-- STATUS -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"\n                     style=\"\n                       margin-top:24px;\n                       border:1px dashed #cccccc;\n                       border-radius:10px;\n                     \">\n\n                <tr>\n                  <td align=\"center\" style=\"padding:22px;\">\n\n                    <div style=\"\n                      color:#999999;\n                      font-size:11px;\n                      font-weight:bold;\n                      letter-spacing:1px;\n                      margin-bottom:8px;\n                    \">\n                      RESERVATION STATUS\n                    </div>\n\n                    <div style=\"\n                      color:#222222;\n                      font-size:15px;\n                      font-weight:bold;\n                    \">\n                      ✓ CONFIRMED\n                    </div>\n\n                  </td>\n                </tr>\n\n              </table>\n\n\n              <!-- FOOTER MESSAGE -->\n              <p style=\"\n                margin:25px 8px 5px 8px;\n                text-align:center;\n                color:#888888;\n                font-size:12px;\n                line-height:1.5;\n              \">\n                Please keep this confirmation email available when attending\n                the event. Further event details and updates may be sent to\n                your registered email.\n              </p>\n\n            </td>\n          </tr>\n\n\n          <!-- FOOTER -->\n          <tr>\n            <td style=\"\n              background:#fafafa;\n              padding:20px;\n              text-align:center;\n              color:#aaaaaa;\n              font-size:11px;\n            \">\n              © 2026 Arab Automators Event\n            </td>\n          </tr>\n\n        </table>\n\n      </td>\n    </tr>\n\n  </table>\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1184,
+        480
+      ],
+      "id": "7901dc72-98d6-44e0-aa89-c679f58869dc",
+      "name": "Send a message",
+      "webhookId": "8299fdcb-c6a2-4bce-9ad0-f9b73c8c10c0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ajl2AaUruQnUbPvz",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Testing\ntally form link\nhttps://tally.so/r/5BJKoo",
+        "width": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        192,
+        720
+      ],
+      "id": "afa42cb4-e49e-4e45-a1c2-cd9594886b1a",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Insert Data": {
+      "main": [
+        [
+          {
+            "node": "Clarify Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clarify Data": {
+      "main": [
+        [
+          {
+            "node": "Send Confirmation Mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Data": {
+      "main": [
+        [
+          {
+            "node": "Insert Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tally Trigger": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert row": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "aa42b36b-a095-425d-a3d5-5aca975bae7e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ffb3a7681a2409e5603e233585f9ef8b069c3606e6dd4c3fb2765ef81992feb4"
+  },
+  "nodeGroups": [],
+  "id": "uAFS1GIQUaYxXxNB",
+  "tags": []
+}
